@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DocumnetCreators\**" />
+    <EmbeddedResource Remove="DocumnetCreators\**" />
+    <None Remove="DocumnetCreators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentManagement.Abstractions\DocumentManagement.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DocumentServices\" />
+  </ItemGroup>
+
+</Project>
