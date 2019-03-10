@@ -1,4 +1,8 @@
 ﻿using System;
+using DocumentManagement;
+using DocumentManagement.Abstractions.DocumentCreators;
+using DocumentManagement.Database;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DocumentManager.Test
 {
@@ -6,7 +10,13 @@ namespace DocumentManager.Test
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			var serviceCollection = new ServiceCollection();
+			serviceCollection.TryAddDocumentManagement(new Settings(".\\DocManager"))
+				.TryAddDocManagerDatabse<ConnectionFactory>();
+
+			var provider = serviceCollection.BuildServiceProvider();
+
+			IDocumentCreator creator = provider.GetService<IDocumentCreator>();
 		}
 	}
 }
