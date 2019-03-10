@@ -7,8 +7,8 @@ namespace DocumentManagement.Abstractions
 	public class Document
 	{
 		public string ID { get; set;}
-		public DateTime Created { get; set; }
-		public DateTime Updated { get; set; }
+		public DateTime? Created { get; set; }
+		public DateTime? Updated { get; set; }
 		public DocMetaData MetaData { get; set; }
 		public MangedFile MangedFile { get; set; }
 		public IEnumerable<DocumentReference> References { get; set; }

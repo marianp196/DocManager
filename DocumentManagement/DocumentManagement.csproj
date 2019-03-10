@@ -14,8 +14,4 @@
     <ProjectReference Include="..\DocumentManagement.Abstractions\DocumentManagement.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DocumentServices\" />
-  </ItemGroup>
-
 </Project>
