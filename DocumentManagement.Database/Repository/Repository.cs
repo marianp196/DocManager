@@ -19,7 +19,7 @@ namespace DocumentManagement.Database.Repository
 
 		public async Task Create(TObj obj)
 		{
-			await _connection.InsertAsync<TObj>(obj);
+			await _connection.InsertAsync(obj);
 		}
 
 		public async Task Delete(TKey obj)

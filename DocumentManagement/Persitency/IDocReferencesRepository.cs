@@ -17,7 +17,7 @@ namespace DocumentManagement.Persitency
 		public DocReferenceDto(string documentId, DocumentReference documentRefernece)
 		{
 			Id = documentRefernece.Id;
-			Key = documentRefernece.Key;
+			Value = documentRefernece.Key;
 			Name = documentRefernece.Type;
 			DocumentID = documentId;
 		}
@@ -28,13 +28,13 @@ namespace DocumentManagement.Persitency
 		public string Id { get; set; }
 		public string DocumentID { get; set;}
 		public string Name { get; set; }
-		public string Key { get; set; }
+		public string Value { get; set; }
 
 		public DocumentReference GetDomain()
 		{
 			var dref = new DocumentReference();
 			dref.Id = Id;
-			dref.Key = Key;
+			dref.Key = Value;
 			dref.Type = Name;
 
 			return dref;
