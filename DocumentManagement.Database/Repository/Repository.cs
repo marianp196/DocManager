@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using System.Linq;
-
 namespace DocumentManagement.Database.Repository
 {
 	public class Repository<TKey, TObj> : IRepository<TKey, TObj>
@@ -19,7 +18,7 @@ namespace DocumentManagement.Database.Repository
 
 		public async Task Create(TObj obj)
 		{
-			await _connection.InsertAsync(obj);
+			 await _connection.InsertAsync(obj);
 		}
 
 		public async Task Delete(TKey obj)

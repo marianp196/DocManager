@@ -33,6 +33,8 @@ namespace DocumentManagement.DocumentCreators
 			managedFile.InRootPath = true;
 			managedFile.FileName = Guid.NewGuid().ToString();
 			managedFile.Extension = fileData.Extension;
+			doc.MangedFile = managedFile;
+			doc.MetaData = metaData;
 
 			await createFileInDocMangerDirectory(fileData.Stream, managedFile);//ToDo Exception Handling verbessern
 

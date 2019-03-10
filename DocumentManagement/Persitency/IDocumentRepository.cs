@@ -18,7 +18,8 @@ namespace DocumentManagement.Persitency
 		public DocumentDto()
 		{}
 
-		public string Id { get; set; }
+		public int? Id { get; set; } // ist hier drin wegen blödem simpleCrud framework... bis ich was besseres hab..scheißdreck
+		public string DocId { get; set; }
 		public DateTime? Created { get; set; }
 		public DateTime? Updated { get; set; }
 		public string Title { get; set; }
@@ -29,7 +30,7 @@ namespace DocumentManagement.Persitency
 
 		private void assign(Document document)
 		{
-			Id = document.ID;
+			DocId = document.ID;
 			Created = document.Created;
 			Updated = document.Updated;
 			Title = document.MetaData?.Title;
@@ -42,7 +43,7 @@ namespace DocumentManagement.Persitency
 		{
 			var document = new Document();
 			
-			document.ID = Id;
+			document.ID = DocId;
 			document.Created = Created;
 			document.Updated = Updated;
 
