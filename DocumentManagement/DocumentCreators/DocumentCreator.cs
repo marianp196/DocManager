@@ -64,7 +64,10 @@ namespace DocumentManagement.DocumentCreators
 		private async Task<bool> createFileInDocMangerDirectory(Stream createFile, MangedFile mangedFile)
 		{
 			FileStream file = File.Create(getPath(mangedFile));
-			await createFile.CopyToAsync(file);
+			using (file)
+			{
+				await createFile.CopyToAsync(file);
+			}
 			return true;
 		}
 
