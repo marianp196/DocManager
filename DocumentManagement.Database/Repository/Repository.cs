@@ -48,6 +48,6 @@ namespace DocumentManagement.Database.Repository
 			await _connection.UpdateAsync(obj);
 		}
 
-		private IDbConnection _connection;
+		protected IDbConnection _connection;
 	}
 }
