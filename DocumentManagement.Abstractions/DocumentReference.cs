@@ -6,8 +6,8 @@ namespace DocumentManagement.Abstractions
 {
 	public class DocumentReference
 	{
-		string Id { get; set;}
-		string Type { get; set; }
-		string Key { get; set; }
+		public string Id { get; set;}
+		public string Type { get; set; }
+		public string Key { get; set; }
 	}
 }

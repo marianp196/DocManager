@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentManagement.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,30 @@ namespace DocumentManagement.Persitency
 
 	public class DocReferenceDto
 	{
+		public DocReferenceDto(string documentId, DocumentReference documentRefernece)
+		{
+			Id = documentRefernece.Id;
+			Key = documentRefernece.Key;
+			Name = documentRefernece.Type;
+			DocumentID = documentId;
+		}
+
+		public DocReferenceDto()
+		{}
+
 		public string Id { get; set; }
 		public string DocumentID { get; set;}
 		public string Name { get; set; }
 		public string Key { get; set; }
+
+		public DocumentReference GetDomain()
+		{
+			var dref = new DocumentReference();
+			dref.Id = Id;
+			dref.Key = Key;
+			dref.Type = Name;
+
+			return dref;
+		}
 	}
 }
