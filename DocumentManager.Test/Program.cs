@@ -25,11 +25,7 @@ namespace DocumentManager.Test
 
 			IDocumentFileService creator = provider.GetService<IDocumentFileService>();
 
-			DocumentDto dto = new DocumentDto();
-			dto.DocId = Guid.NewGuid().ToString();
-			new ConnectionFactory().Get().Insert(dto);
-
-
+		
 			FileStream fs = File.Open("C:\\Users\\marian\\Desktop\\test.txt", FileMode.Open);
 
 			try
@@ -42,7 +38,12 @@ namespace DocumentManager.Test
 				Console.WriteLine(e.ToString());
 				Console.Read();
 			}
-			
+
+			var docs = await creator.GetAll();
+			foreach(var doc in docs)
+				Console.WriteLine(doc.MangedFile.GetFileName());
+			Console.Read();
+
 		}
 	}
 }

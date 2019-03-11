@@ -25,7 +25,7 @@ namespace DocumentManagement.Database.References
 
 		public async Task<IEnumerable<DocReferenceDto>> GetByDocID(string docId)
 		{
-			return await _connection.QueryAsync<DocReferenceDto>("select * from DocumentDto where DocumentID = @id", 
+			return await _connection.QueryAsync<DocReferenceDto>("select * from DocReferenceDto where DocumentID = @id", 
 				new { id = docId });
 		}
 

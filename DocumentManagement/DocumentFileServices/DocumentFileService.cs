@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentManagement.DocumentCreators
+namespace DocumentManagement.DocumentFileServices
 {
 	public class DocumentFileService : IDocumentFileService
 	{
@@ -15,50 +15,38 @@ namespace DocumentManagement.DocumentCreators
 		{
 			_settings = settings ?? throw new ArgumentNullException(nameof(settings));
 			_documentService = documentService ?? throw new ArgumentNullException(nameof(documentService));
+
+			if (_settings.BasePath == null || _settings.BasePath == "" || !Directory.Exists(_settings.BasePath))
+				throw new ArgumentException("BasePath doesn't exist");
 		}
 
 		public async Task<CreateResult> Create(DocMetaData metaData,
 			IEnumerable<DocumentReference> references,
 			FileCreate fileData)
 		{
-			if (metaData == null)
-				throw new ArgumentNullException(nameof(metaData));
-			if (fileData == null)
-				throw new ArgumentNullException(nameof(fileData));
-			if (fileData.Stream == null)
-				throw new ArgumentNullException(nameof(fileData.Stream));
+			DocumentFileCreator creator = new DocumentFileCreator(_settings.BasePath);
+			var document = await creator.CreateDocument(metaData, references, fileData);//Das ist noch nicht optimal
 
-			var doc = createDoc(metaData, references);
-			var managedFile = new MangedFile();
-			managedFile.InRootPath = true;
-			managedFile.FileName = Guid.NewGuid().ToString();
-			managedFile.Extension = fileData.Extension;
-			doc.MangedFile = managedFile;
-			doc.MetaData = metaData;
-
-			await createFileInDocMangerDirectory(fileData.Stream, managedFile);//ToDo Exception Handling verbessern
-
-			try
-			{
-				var id = await _documentService.Create(doc);
-				return new CreateResult(id);
-			}
-			catch (Exception e)
-			{
-				//ToDo Datei wieder entfernen
-				throw e;
-			}
-
+			var newID = await _documentService.Create(document);
+			
+			return new CreateResult(newID);
 		}
 
-		public Task<IEnumerable<DocumentFile>> GetAll()
+		public async Task<IEnumerable<DocumentFile>> GetAll()
 		{
 			var documents = await _documentService.GetAll();
+			var resultList = new List<DocumentFile>();
+			foreach (var document in documents)
+				resultList.Add(createDocumentFile(document));
+			return resultList;
 		}
 
-		public Task<DocumentFile> Get(string id)
+		public async Task<DocumentFile> Get(string id)
 		{
-			throw new NotImplementedException();
+			if (id == null || id == "")
+				throw new ArgumentException(nameof(id));
+			var document = await _documentService.GetByID(id);
+			return createDocumentFile(document);
 		}
 
 		public Task<DocumentFile> Delete(string id)
@@ -66,44 +54,32 @@ namespace DocumentManagement.DocumentCreators
 			throw new NotImplementedException();
 		}
 
-		public Task<IEnumerable<DocumentFile>> GetWhere(string Key, string id)
+		public async Task<IEnumerable<DocumentFile>> GetWhere(string Key, string id)
 		{
-			throw new NotImplementedException();
+			//var documents = await _documentService.;
+			var resultList = new List<DocumentFile>();
+			/*foreach (var document in documents)
+				resultList.Add(await createDocumentFile(document));*/
+			return resultList;
 		}
 
-		private async Task<DocumentFile> createDocumentFile(Document doc)
+		private DocumentFile createDocumentFile(Document doc)
 		{
-			return null;
-		}
-		
-		private Document createDoc(DocMetaData metaData, IEnumerable<DocumentReference> references)
-		{
-			var document = new Document();
-			document.Created = DateTime.Now;
-			document.Updated = DateTime.Now;
-			document.References = references;
-			document.MetaData = metaData;
-			return document;
-		}
+			if(doc.MangedFile?.GetFileName() == null)
+				return new DocumentFile(doc, null);
 
-		private async Task<bool> createFileInDocMangerDirectory(Stream createFile, MangedFile mangedFile)
-		{
-			FileStream file = File.Create(getPath(mangedFile));
-			using (file)
+			var path = doc.MangedFile?.GetFileName();
+			if (doc.MangedFile.InRootPath)
 			{
-				await createFile.CopyToAsync(file);
+				path = Path.Combine(_settings.BasePath, doc.MangedFile.GetFileName());
 			}
-			return true;
-		}
 
-		private string getPath(MangedFile mangedFile)
-		{
-			var path =  Path.Combine(_settings.BasePath, mangedFile.FileName);
-			var ex = mangedFile.Extension;
-			if(ex != null && ex != "")
-				path += (ex.StartsWith(".") ? "" : ".") + ex;
-			return path;
+			if (!File.Exists(path))
+				path = null;
+
+			return new DocumentFile(doc, path);
 		}
+	
 
 		private IDocumentDataService _documentService;
 		private ISettings _settings;
