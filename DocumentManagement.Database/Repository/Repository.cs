@@ -11,9 +11,11 @@ namespace DocumentManagement.Database.Repository
 {
 	public class Repository<TKey, TObj> : IRepository<TKey, TObj>
 	{
-		public Repository(IConnectionFactory connectionFactory)
+		public Repository(IConnectionFactory connectionFactory, string tableName, string primKeyName)
 		{
 			_connection = connectionFactory.Get();
+			TableName = tableName;
+			PrimKeyName = primKeyName;
 		}
 
 		public async Task Create(TObj obj)
@@ -23,7 +25,8 @@ namespace DocumentManagement.Database.Repository
 
 		public async Task Delete(TKey obj)
 		{
-			await _connection.DeleteAsync<TObj>(obj);
+			var sql = "delete from " + TableName + " where " + PrimKeyName + " = @ID ";
+			await _connection.ExecuteAsync(sql,new { id = obj });
 		}
 
 		public async Task<bool> Exists(TKey id)
@@ -33,7 +36,8 @@ namespace DocumentManagement.Database.Repository
 
 		public async Task<TObj> Get(TKey id)
 		{
-			var result = await _connection.GetListAsync<TObj>(new { id });
+			var sql = "select * from " + TableName + " where  " + PrimKeyName + " = @id";
+			var result = await _connection.QueryAsync<TObj>(sql, new { id = id });
 			return result.FirstOrDefault();
 		}
 
@@ -44,9 +48,12 @@ namespace DocumentManagement.Database.Repository
 
 		public async Task Update(TObj obj)
 		{
-			await _connection.UpdateAsync(obj);
+			throw new NotImplementedException();
+			//await _connection.UpdateAsync(); //UpdateAsync(obj);
 		}
 
 		protected IDbConnection _connection;
+		protected string TableName { get; set; }
+		protected string PrimKeyName { get; set; }
 	}
 }

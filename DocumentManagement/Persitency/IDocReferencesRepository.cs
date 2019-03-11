@@ -8,6 +8,7 @@ namespace DocumentManagement.Persitency
 {
 	public interface IDocReferencesRepository: IRepository<string, DocReferenceDto>
 	{
+		Task<IEnumerable<DocReferenceDto>> GetByDocID(string docId);
 		Task<IEnumerable<DocReferenceDto>> GetByKey(string name, string key);
 		Task<bool> Exists(string name, string key, string documnetId);
 	}
@@ -16,7 +17,7 @@ namespace DocumentManagement.Persitency
 	{
 		public DocReferenceDto(string documentId, DocumentReference documentRefernece)
 		{
-			Id = documentRefernece.Id;
+			RefId = documentRefernece.Id;
 			Value = documentRefernece.Key;
 			Name = documentRefernece.Type;
 			DocumentID = documentId;
@@ -25,7 +26,8 @@ namespace DocumentManagement.Persitency
 		public DocReferenceDto()
 		{}
 
-		public string Id { get; set; }
+		public int? Id { get; set; }// wegen simpleCrud hier drin
+		public string RefId { get; set; }
 		public string DocumentID { get; set;}
 		public string Name { get; set; }
 		public string Value { get; set; }
@@ -33,7 +35,7 @@ namespace DocumentManagement.Persitency
 		public DocumentReference GetDomain()
 		{
 			var dref = new DocumentReference();
-			dref.Id = Id;
+			dref.Id = RefId;
 			dref.Key = Value;
 			dref.Type = Name;
 

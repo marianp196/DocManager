@@ -3,6 +3,7 @@ using DocumentManagement.Abstractions.DocumentServices;
 using DocumentManagement.Persitency;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace DocumentManagement.DocumentServices
 			else
 				document.ID = Guid.NewGuid().ToString();
 
-			//ToDo checkFileExists
+			//Check File exists
 
 			await persist(document);
 
@@ -32,9 +33,29 @@ namespace DocumentManagement.DocumentServices
 		}
 
 		
-		public Task Delete(Document document)
+		public async Task Delete(Document document)
 		{
-			throw new NotImplementedException();
+			await _documentRository.Delete(document.ID);
+
+			var defs = await _docReferenceRepository.GetByDocID(document.ID);
+			foreach (var def in defs)
+				await _docReferenceRepository.Delete(def.RefId);
+		}
+
+		
+		public async Task<IEnumerable<Document>> GetAll()
+		{
+			var dtos = await _documentRository.GetAll();
+			var result = new List<Document>();
+			foreach(var dto in dtos)
+				result.Add(await createDocument(dto));
+			return result;
+		}
+
+		public async Task<Document> GetByID(string id)
+		{
+			var docDto = await _documentRository.Get(id);
+			return await createDocument(docDto);
 		}
 
 		public Task Update(Document document)
@@ -42,14 +63,14 @@ namespace DocumentManagement.DocumentServices
 			throw new NotImplementedException();
 		}
 
-		public Task<IEnumerable<Document>> GetAll()
+		private async Task<Document> createDocument(DocumentDto dto)
 		{
-			throw new NotImplementedException();
-		}
+			var doc = dto.CreateDomain();
 
-		public Task<Document> GetByID(string id)
-		{
-			throw new NotImplementedException();
+			var refListDtos = await _docReferenceRepository.GetByDocID(doc.ID);
+			doc.References = refListDtos.Select(x => x.GetDomain());
+
+			return doc;
 		}
 
 		private async Task persist(Document document)

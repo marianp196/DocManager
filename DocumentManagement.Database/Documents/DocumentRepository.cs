@@ -9,7 +9,8 @@ namespace DocumentManagement.Database.Documents
 {
 	public class DocumentRepository : Repository<string, DocumentDto>, IDocumentRepository
 	{
-		public DocumentRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
+		public DocumentRepository(IConnectionFactory connectionFactory) : 
+			base(connectionFactory, "DocumentDto", "DocId")
 		{
 		}
 	}
