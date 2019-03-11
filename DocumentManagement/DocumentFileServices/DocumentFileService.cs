@@ -1,6 +1,6 @@
 ﻿using DocumentManagement.Abstractions;
-using DocumentManagement.Abstractions.DocumentCreators;
-using DocumentManagement.Abstractions.DocumentServices;
+using DocumentManagement.Abstractions.DocumentFileServices;
+using DocumentManagement.Abstractions.DocumentDataServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace DocumentManagement.DocumentCreators
 {
-	public class DocumentCreator : IDocumentCreator
+	public class DocumentFileService : IDocumentFileService
 	{
-		public DocumentCreator(IDocumentService documentService, ISettings settings)
+		public DocumentFileService(IDocumentDataService documentService, ISettings settings)
 		{
 			_settings = settings ?? throw new ArgumentNullException(nameof(settings));
 			_documentService = documentService ?? throw new ArgumentNullException(nameof(documentService));
 		}
 
-		public async Task<CreateResult> Create(DocMetaData metaData, 
-			IEnumerable<DocumentReference> references, 
+		public async Task<CreateResult> Create(DocMetaData metaData,
+			IEnumerable<DocumentReference> references,
 			FileCreate fileData)
 		{
 			if (metaData == null)
@@ -43,14 +43,39 @@ namespace DocumentManagement.DocumentCreators
 				var id = await _documentService.Create(doc);
 				return new CreateResult(id);
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				//ToDo Datei wieder entfernen
 				throw e;
 			}
-					
+
 		}
 
+		public Task<IEnumerable<DocumentFile>> GetAll()
+		{
+			var documents = await _documentService.GetAll();
+		}
+
+		public Task<DocumentFile> Get(string id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<DocumentFile> Delete(string id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<IEnumerable<DocumentFile>> GetWhere(string Key, string id)
+		{
+			throw new NotImplementedException();
+		}
+
+		private async Task<DocumentFile> createDocumentFile(Document doc)
+		{
+			return null;
+		}
+		
 		private Document createDoc(DocMetaData metaData, IEnumerable<DocumentReference> references)
 		{
 			var document = new Document();
@@ -80,7 +105,7 @@ namespace DocumentManagement.DocumentCreators
 			return path;
 		}
 
-		private IDocumentService _documentService;
+		private IDocumentDataService _documentService;
 		private ISettings _settings;
 	}
 }

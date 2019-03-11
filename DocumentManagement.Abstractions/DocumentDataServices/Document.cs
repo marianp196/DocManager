@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DocumentManagement.Abstractions.DocumentDataServices;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace DocumentManagement.Abstractions
+namespace DocumentManagement.Abstractions.DocumentDataServices
 {
 	public class Document
 	{

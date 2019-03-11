@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Dapper;
 using DocumentManagement;
 using DocumentManagement.Abstractions;
-using DocumentManagement.Abstractions.DocumentCreators;
+using DocumentManagement.Abstractions.DocumentDataServices;
+using DocumentManagement.Abstractions.DocumentFileServices;
 using DocumentManagement.Database;
 using DocumentManagement.Persitency;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,7 @@ namespace DocumentManager.Test
 
 			var provider = serviceCollection.BuildServiceProvider();
 
-			IDocumentCreator creator = provider.GetService<IDocumentCreator>();
+			IDocumentFileService creator = provider.GetService<IDocumentFileService>();
 
 			DocumentDto dto = new DocumentDto();
 			dto.DocId = Guid.NewGuid().ToString();

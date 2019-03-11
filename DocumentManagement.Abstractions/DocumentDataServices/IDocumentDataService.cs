@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentManagement.Abstractions.DocumentServices
+namespace DocumentManagement.Abstractions.DocumentDataServices
 {
-	public interface IDocumentService
+	public interface IDocumentDataService
 	{
 		Task<string> Create(Document document);
 		Task Update(Document document);

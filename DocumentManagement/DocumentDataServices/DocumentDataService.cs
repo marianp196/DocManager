@@ -1,5 +1,5 @@
 ﻿using DocumentManagement.Abstractions;
-using DocumentManagement.Abstractions.DocumentServices;
+using DocumentManagement.Abstractions.DocumentDataServices;
 using DocumentManagement.Persitency;
 using System;
 using System.Collections.Generic;
@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentManagement.DocumentServices
+namespace DocumentManagement.DocumentFileServices
 {
-	public class DocumentService : IDocumentService
+	public class DocumentDataService : IDocumentDataService
 	{
-		public DocumentService(IDocumentRepository documentRository, IDocReferencesRepository docReferenceRepository)
+		public DocumentDataService(IDocumentRepository documentRository, IDocReferencesRepository docReferenceRepository)
 		{
 			_documentRository = documentRository;
 			_docReferenceRepository = docReferenceRepository;

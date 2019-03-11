@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DocumentManagement.Abstractions
+namespace DocumentManagement.Abstractions.DocumentDataServices
 {
 	public class DocumentType
 	{

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using DocumentManagement.Abstractions;
-using DocumentManagement.Abstractions.DocumentCreators;
-using DocumentManagement.Abstractions.DocumentServices;
+using DocumentManagement.Abstractions.DocumentFileServices;
+using DocumentManagement.Abstractions.DocumentDataServices;
 using DocumentManagement.DocumentCreators;
-using DocumentManagement.DocumentServices;
+using DocumentManagement.DocumentFileServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -15,8 +15,8 @@ namespace DocumentManagement
 	{
 		public static IServiceCollection TryAddDocumentManagement(this IServiceCollection sc, Settings settings)
 		{
-			sc.TryAddTransient<IDocumentCreator, DocumentCreator>();
-			sc.TryAddTransient<IDocumentService, DocumentService>();
+			sc.TryAddTransient<IDocumentFileService, DocumentFileService>();
+			sc.TryAddTransient<IDocumentDataService, DocumentDataService>();
 			sc.TryAddTransient<ISettings>(c => settings);
 			return sc;
 		}
