@@ -1,0 +1,12 @@
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\bin\Debug\netcoreapp2.1\DocumentManagement.Abstractions.dll
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\obj\Debug\netcoreapp2.1\DocumentManagement.csprojAssemblyReference.cache
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\obj\Debug\netcoreapp2.1\DocumentManagement.csproj.CoreCompileInputs.cache
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\obj\Debug\netcoreapp2.1\DocumentManagement.AssemblyInfoInputs.cache
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\obj\Debug\netcoreapp2.1\DocumentManagement.AssemblyInfo.cs
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\bin\Debug\netcoreapp2.1\DocumentManagement.deps.json
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\bin\Debug\netcoreapp2.1\DocumentManagement.dll
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\bin\Debug\netcoreapp2.1\DocumentManagement.pdb
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\bin\Debug\netcoreapp2.1\DocumentManagement.Abstractions.pdb
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\obj\Debug\netcoreapp2.1\DocumentManagement.csproj.CopyComplete
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\obj\Debug\netcoreapp2.1\DocumentManagement.dll
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement\obj\Debug\netcoreapp2.1\DocumentManagement.pdb

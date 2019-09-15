@@ -1,0 +1,9 @@
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\bin\Release\netcoreapp2.1\DocumentManagement.Abstractions.deps.json
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\bin\Release\netcoreapp2.1\DocumentManagement.Abstractions.dll
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\bin\Release\netcoreapp2.1\DocumentManagement.Abstractions.pdb
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\obj\Release\netcoreapp2.1\DocumentManagement.Abstractions.csprojAssemblyReference.cache
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\obj\Release\netcoreapp2.1\DocumentManagement.Abstractions.csproj.CoreCompileInputs.cache
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\obj\Release\netcoreapp2.1\DocumentManagement.Abstractions.AssemblyInfoInputs.cache
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\obj\Release\netcoreapp2.1\DocumentManagement.Abstractions.AssemblyInfo.cs
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\obj\Release\netcoreapp2.1\DocumentManagement.Abstractions.dll
+C:\Users\marian\Desktop\ws\DocuManager\DocumentManagement.Abstractions\obj\Release\netcoreapp2.1\DocumentManagement.Abstractions.pdb

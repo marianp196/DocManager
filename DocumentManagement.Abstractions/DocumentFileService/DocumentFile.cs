@@ -20,7 +20,7 @@ namespace DocumentManagement.Abstractions.DocumentFileServices
 
 		public Stream OpenReadStream()
 		{
-			if (_filePath == null)
+			if (_filePath == null || !FileExists)
 				throw new FileNotFoundException(_filePath);
 			return File.OpenRead(_filePath);
 		}
@@ -56,7 +56,7 @@ namespace DocumentManagement.Abstractions.DocumentFileServices
 			foreach(var prop in typeFrom.GetProperties())
 			{
 				var matching = typeTo.GetProperties().Where(p => p.Name == prop.Name).FirstOrDefault();
-				if(matching != null)
+				if(matching != null &&  matching.GetType() == prop.GetType())
 				{
 					var value = prop.GetValue(from);
 					matching.SetValue(to, value);

@@ -25,7 +25,7 @@ namespace DocumentManagement.DocumentFileServices
 			FileCreate fileData)
 		{
 			DocumentFileCreator creator = new DocumentFileCreator(_settings.BasePath);
-			var document = await creator.CreateDocument(metaData, references, fileData);//Das ist noch nicht optimal
+			var document = await creator.CreateDocument(metaData, references, fileData);//Das ist noch nicht wirklich optimal :)
 
 			var newID = await _documentService.Create(document);
 			
